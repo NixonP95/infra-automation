@@ -132,29 +132,27 @@ Would you like to create another machine? (yes/no): no
 
 ---
 
-🔍 Example Log Output (logs/provisioning.log)
-pgsql
-Copy
-Edit
+## 🔍 Example Log Output (logs/provisioning.log)
+```pgsql
 2025-08-07 18:15:23,452 - INFO - Prompted user to create a new machine.
 2025-08-07 18:15:25,320 - INFO - Machine 'web01' saved successfully.
 2025-08-07 18:15:27,112 - INFO - Nginx installation script ran successfully.
 2025-08-07 18:15:29,876 - INFO - Provisioner exited by user.
-📦 Requirements
+```
+
+---
+
+## 📦 Requirements
 All Python dependencies are listed in requirements.txt:
 
-nginx
-Copy
-Edit
-python3
+```text
 jsonschema
-(You can add more packages here as the project grows.)
+```
 
-📌 Next Steps
-Integrate AWS EC2 provisioning using boto3.
+---
 
-Add Terraform templates for real infrastructure creation.
-
-Expand service automation (e.g., Apache, MySQL).
-
-Implement a GUI for easier interaction.
+## 📌 Next Steps
+- Integrate AWS EC2 provisioning using boto3.
+- Add Terraform templates for real infrastructure creation.
+- Expand service automation (e.g., Apache, MySQL).
+- Implement a GUI for easier interaction.
