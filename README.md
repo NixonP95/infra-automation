@@ -118,22 +118,19 @@ Would you like to create another machine? (yes/no): no
 ✅ Provisioning process completed. Goodbye! 👋
 ```
 
-📝 Features
-User input validation (name, OS, CPU, RAM).
+---
 
-Aliases for OS names (win → windows, mac → macOs).
+## 📝 Features
+- User input validation (name, OS, CPU, RAM).
+- Aliases for OS names (win → windows, mac → macOs).
+- Persistent storage in configs/instances.json.
+- Service automation with Bash (setup_nginx.sh).
+- Logging system:
+  - Logs stored in logs/provisioning.log.
+  - Captures provisioning start/end, errors, and success messages.
+- Cross-platform support for Windows, macOS, and Linux.
 
-Persistent storage in configs/instances.json.
-
-Service automation with Bash (setup_nginx.sh).
-
-Logging system:
-
-Logs stored in logs/provisioning.log.
-
-Captures provisioning start/end, errors, and success messages.
-
-Cross-platform support for Windows, macOS, and Linux.
+---
 
 🔍 Example Log Output (logs/provisioning.log)
 pgsql
