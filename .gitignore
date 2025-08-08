@@ -1,4 +1,25 @@
-venv/
+# Python cache & build files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Logs & runtime data
 logs/
+*.log
+
+# Configs with runtime data
+configs/instances.json
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
