@@ -64,28 +64,29 @@ cd infra-automation
 ```
 
 2️⃣ Create a Python virtual environment
-bash
-Copy
-Edit
+
+```bash
 python -m venv venv
+```
+
 3️⃣ Activate the virtual environment
-Windows (PowerShell):
 
-powershell
-Copy
-Edit
+**Windows (PowerShell):**
+
+```powershell
 venv\Scripts\Activate.ps1
-Linux/macOS:
+```
 
-bash
-Copy
-Edit
+**Linux/macOS:**
+
+```bash
 source venv/bin/activate
+```
+
 4️⃣ Install dependencies
-bash
-Copy
-Edit
+```bash
 pip install -r requirements.txt
+```
 
 ---
 
