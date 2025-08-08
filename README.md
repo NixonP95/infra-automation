@@ -43,8 +43,10 @@ infra-automation/
 │-- requirements.txt            # Python dependencies
 │-- README.md                   # Project documentation
 
+---
 
-⚙️ Setup Instructions
+##⚙️ Setup Instructions
+
 1️⃣ Clone the repository
 bash
 Copy
@@ -74,6 +76,9 @@ bash
 Copy
 Edit
 pip install -r requirements.txt
+
+---
+
 ▶️ Usage
 Run the provisioning tool:
 
