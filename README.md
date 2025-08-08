@@ -42,6 +42,8 @@ infra-automation/
 │
 │-- requirements.txt            # Python dependencies
 │-- README.md                   # Project documentation
+
+
 ⚙️ Setup Instructions
 1️⃣ Clone the repository
 bash
