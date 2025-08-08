@@ -2,46 +2,48 @@
 
 ## 📌 Project Overview
 This project is a rolling DevOps automation tool designed to **simulate infrastructure provisioning** and **service configuration**.  
-It will evolve over time as new concepts are learned, with future enhancements including **AWS** and **Terraform** integrations to create real resources.
+It will evolve over time as new concepts are learned, with future enhancements planned (e.g., AWS + Terraform) to create real resources.
 
-At its current stage, the provisioning process is **mocked** to simulate infrastructure automation while focusing on:
+At this stage the provisioning is **mocked** while focusing on:
 - **Python modular design**
 - **Input validation**
 - **Service automation with Bash**
-- **Logging and error handling**
+- **Logging & error handling**
 
 ---
 
 ## 🎯 Objectives
-- Develop a modular Python-based automation tool that simulates **VM provisioning**.  
-- Accept **user input** for defining virtual machines (VMs).  
-- Validate input using **Python** and **jsonschema**.  
-- Store VM configurations in **JSON format**.  
-- Use **classes** for clean, reusable code.  
-- Automate service installation using **Bash scripts**.  
-- Implement **logging** for both Python and Bash.  
-- Provide **error handling** for a robust experience.
+- Develop a modular Python-based tool that simulates VM provisioning.
+- Accept user input for defining virtual machines (VMs).
+- Validate input using Python and `jsonschema`.
+- Store VM configurations in JSON format.
+- Use classes for clean, reusable code.
+- Automate service installation using Bash scripts.
+- Implement logging for both Python and Bash.
+- Provide robust error handling.
 
 ---
 
 ## 📂 Project Structure
-```bash
+```text
 infra-automation/
-│-- scripts/
-│   ├── infra_simulator.py      # Main provisioning script
-│   ├── setup_nginx.sh          # Bash script for Nginx installation
 │
-│-- configs/
-│   ├── instances.json          # Stored VM configurations
+├─ scripts/
+│  ├─ infra_simulator.py      # Main provisioning script (Python)
+│  └─ setup_nginx.sh          # Service installer (Bash; dnf/yum/apt-get)
 │
-│-- logs/
-│   ├── provisioning.log        # Provisioning and error logs
+├─ configs/
+│  └─ instances.json          # Stored VM configurations (runtime data)
 │
-│-- src/
-│   ├── machine.py              # Machine class definition
+├─ logs/
+│  └─ provisioning.log        # Provisioning & error logs (runtime data)
 │
-│-- requirements.txt            # Python dependencies
-│-- README.md                   # Project documentation
+├─ src/
+│  └─ machine.py              # Machine class definition
+│
+├─ requirements.txt           # Python dependencies (pip)
+└─ README.md                  # Project documentation
+
 
 ---
 
