@@ -43,17 +43,12 @@ infra-automation/
 │-- requirements.txt            # Python dependencies
 │-- README.md                   # Project documentation
 
-🛠 Prerequisites
+## 🛠 Prerequisites
 Before running this project, ensure you have:
-
-Python 3 installed
-
-pip (Python package manager)
-
-Bash (Windows users can use Git Bash)
-
-apt package manager (for Nginx installation on Linux)
-
+- Python 3 installed
+- `pip` (Python package manager)
+- Bash (Windows users can use Git Bash)
+- `apt` package manager (for Nginx installation on Linux)
 ##⚙️ Setup Instructions
 
 1️⃣ Clone the repository
