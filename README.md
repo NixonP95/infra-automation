@@ -1,33 +1,32 @@
-# DevOps Infrastructure Provisioning & Configuration Automation
+# 🛠 DevOps Infrastructure Provisioning & Configuration Automation
 
 ## 📌 Project Overview
-This project is a rolling DevOps automation tool designed to **simulate infrastructure provisioning** and **service configuration**.  
-It will evolve over time as new concepts are learned, with future enhancements planned (e.g., AWS + Terraform) to create real resources.
+This project is a **rolling DevOps automation tool** designed to simulate infrastructure provisioning and service configuration.  
+It will evolve over time as new concepts are learned, with future enhancements including **AWS** and **Terraform** integrations to create real resources.
 
-At this stage the provisioning is **mocked** while focusing on:
-- **Python modular design**
-- **Input validation**
-- **Service automation with Bash**
-- **Logging & error handling**
+At its current stage, the provisioning process is **mocked** to simulate infrastructure automation while focusing on:
+- Python modular design
+- Input validation
+- Service automation with Bash
+- Logging and error handling
 
 ---
 
 ## 🎯 Objectives
-- Develop a modular Python-based tool that simulates VM provisioning.
+- Develop a modular Python-based automation tool that simulates VM provisioning.
 - Accept user input for defining virtual machines (VMs).
-- Validate input using Python and `jsonschema`.
-- Store VM configurations in JSON format.
-- Use classes for clean, reusable code.
-- Automate service installation using Bash scripts.
+- Validate input using **Python** and **jsonschema**.
+- Store VM configurations in **JSON** format.
+- Use **classes** for clean, reusable code.
+- Automate service installation using **Bash scripts**.
 - Implement logging for both Python and Bash.
-- Provide robust error handling.
+- Provide error handling for a robust experience.
 
 ---
 
 ## 📂 Project Structure
 ```text
 infra-automation/
-│
 ├─ scripts/
 │  ├─ infra_simulator.py      # Main provisioning script (Python)
 │  └─ setup_nginx.sh          # Service installer (Bash; dnf/yum/apt-get)
@@ -45,16 +44,16 @@ infra-automation/
 └─ README.md                  # Project documentation
 
 
----
-
-## 🛠 Prerequisites
+🛠 Prerequisites
 Before running this project, ensure you have:
-- Python 3 installed
-- `pip` (Python package manager)
-- Bash (Windows users can use Git Bash)
-- `apt` package manager (for Nginx installation on Linux)
 
----
+Python 3 installed
+
+pip (Python package manager)
+
+Bash (Windows users can use Git Bash)
+
+apt, yum, or dnf package manager (for Nginx installation on Linux)
 
 ##⚙️ Setup Instructions
 
