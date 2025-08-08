@@ -93,14 +93,12 @@ pip install -r requirements.txt
 ▶️ Usage
 Run the provisioning tool:
 
-bash
-Copy
-Edit
+```bash
 python scripts/infra_simulator.py
-Example interaction:
-vbnet
-Copy
-Edit
+```
+
+**Example interaction:**
+```vbnet
 🚀 Welcome to the VM Provisioner!
 Let's get your virtual machines up and running.
 
@@ -118,6 +116,8 @@ Bash script executed successfully.
 Would you like to create another machine? (yes/no): no
 
 ✅ Provisioning process completed. Goodbye! 👋
+```
+
 📝 Features
 User input validation (name, OS, CPU, RAM).
 
