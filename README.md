@@ -52,14 +52,17 @@ Before running this project, ensure you have:
 - Bash (Windows users can use Git Bash)
 - apt, yum, or dnf package manager (for Nginx installation on Linux)
 
-##⚙️ Setup Instructions
+---
+
+## ⚙️ Setup Instructions
 
 1️⃣ Clone the repository
-bash
-Copy
-Edit
+
+```bash
 git clone https://github.com/your-username/infra-automation.git
 cd infra-automation
+```
+
 2️⃣ Create a Python virtual environment
 bash
 Copy
