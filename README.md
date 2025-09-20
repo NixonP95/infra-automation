@@ -4,7 +4,7 @@
 This repository now documents **two related projects**:
 
 1. **Infrastructure Provisioning & Configuration Automation** (the original project in this repo).  
-2. **AWS Resource Dashboard (Rolling project AWS – Nikita)** – a new project kept under `projects/` with its own code and screenshots.
+2. **AWS Resource Dashboard (Rolling project AWS)** – a new project kept under `projects/` with its own code and screenshots.
 
 Both projects are independent so history stays clean and nothing breaks.
 
@@ -51,7 +51,7 @@ A **Flask + boto3** app that runs on your **local machine** and shows live data 
 ```text
 infra-automation/
 ├─ projects/
-│   └─ Rolling project AWS - Nikita/
+│   └─ Rolling project AWS/
 │       ├─ Python/                      # Application source for the AWS dashboard
 │       │   ├─ app.py                   # Flask app
 │       │   ├─ requirements.txt         # Flask & boto3 deps
@@ -71,7 +71,7 @@ infra-automation/
 ## 🚀 Run AWS Dashboard
 
 ```bash
-cd projects/"Rolling project AWS - Nikita"/Python
+cd projects/"Rolling project AWS"/Python
 python -m venv venv
 # Windows PowerShell
 venv\Scripts\Activate.ps1
@@ -97,7 +97,7 @@ Visit:
 ## 🖼 Proof of Concept
 Screenshots under:
 ```
-projects/Rolling project AWS - Nikita/AWS/Screenshots/
+projects/Rolling project AWS/AWS/Screenshots/
 ```
 - `local host 5001-1.png` – Dashboard view  
 - `local host 5001-2.png` – Extended view  
@@ -139,10 +139,10 @@ logs/
 configs/instances.json
 
 # Project B (AWS Dashboard)
-projects/Rolling project AWS - Nikita/Python/venv/
-projects/Rolling project AWS - Nikita/Python/__pycache__/
-projects/Rolling project AWS - Nikita/Python/*.pyc
-projects/Rolling project AWS - Nikita/Python/.env
+projects/Rolling project AWS/Python/venv/
+projects/Rolling project AWS/Python/__pycache__/
+projects/Rolling project AWS/Python/*.pyc
+projects/Rolling project AWS/Python/.env
 
 # Node / build artifacts
 node_modules/
