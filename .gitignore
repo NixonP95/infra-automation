@@ -1,25 +1,42 @@
-# Python cache & build files
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-
-# Virtual environment
-venv/
-env/
-
-# OS-generated files
-.DS_Store
-Thumbs.db
-
-# Logs & runtime data
-logs/
+*.egg-info/
+*.egg
 *.log
 
-# Configs with runtime data
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+
+# Env / secrets
+*.env
+.env
+
+# Project A (infra-automation)
+logs/
 configs/instances.json
 
-# IDE/editor settings
-.vscode/
-.idea/
-*.swp
+# Project B (AWS Dashboard)
+projects/Rolling project AWS - Nikita/Python/venv/
+projects/Rolling project AWS - Nikita/Python/__pycache__/
+projects/Rolling project AWS - Nikita/Python/*.pyc
+projects/Rolling project AWS - Nikita/Python/.env
+
+# Node / build artifacts
+node_modules/
+dist/
+build/
+EOF
+
