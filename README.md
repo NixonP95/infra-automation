@@ -1,158 +1,151 @@
-# 🛠 DevOps Infrastructure Provisioning & Configuration Automation
+# 🛠 DevOps Infrastructure Provisioning & AWS Dashboard (Rolling Project)
 
-## 📌 Project Overview
-This project is a **rolling DevOps automation tool** designed to simulate infrastructure provisioning and service configuration.  
-It will evolve over time as new concepts are learned, with future enhancements including **AWS** and **Terraform** integrations to create real resources.
+## 📌 Overview
+This repository now documents **two related projects**:
 
-At its current stage, the provisioning process is **mocked** to simulate infrastructure automation while focusing on:
-- Python modular design
-- Input validation
-- Service automation with Bash
-- Logging and error handling
+1. **Infrastructure Provisioning & Configuration Automation** (the original project in this repo).  
+2. **AWS Resource Dashboard (Rolling project AWS – Nikita)** – a new project kept under `projects/` with its own code and screenshots.
+
+Both projects are independent so history stays clean and nothing breaks.
 
 ---
 
-## 🎯 Objectives
-- Develop a modular Python-based automation tool that simulates VM provisioning.
-- Accept user input for defining virtual machines (VMs).
-- Validate input using **Python** and **jsonschema**.
-- Store VM configurations in **JSON** format.
-- Use **classes** for clean, reusable code.
-- Automate service installation using **Bash scripts**.
-- Implement logging for both Python and Bash.
-- Provide error handling for a robust experience.
+## 📌 Project A — Infrastructure Provisioning & Configuration Automation (existing)
 
----
+A Python + Bash simulator that walks through VM provisioning, input validation, JSON persistence, and logging.
 
-## 📂 Project Structure
+### Features
+- Python modular design with classes  
+- Input validation (e.g., via `jsonschema`)  
+- Service automation with Bash (e.g., Nginx install)  
+- Logging and error handling  
+
+### Structure
 ```text
 infra-automation/
 ├─ scripts/
-│  ├─ infra_simulator.py      # Main provisioning script (Python)
-│  └─ setup_nginx.sh          # Service installer (Bash; dnf/yum/apt-get)
+│  ├─ infra_simulator.py
+│  └─ setup_nginx.sh
 │
 ├─ configs/
-│  └─ instances.json          # Stored VM configurations (runtime data)
+│  └─ instances.json
 │
 ├─ logs/
-│  └─ provisioning.log        # Provisioning & error logs (runtime data)
+│  └─ provisioning.log
 │
 ├─ src/
-│  └─ machine.py              # Machine class definition
+│  └─ machine.py
 │
-├─ requirements.txt           # Python dependencies (pip)
-└─ README.md                  # Project documentation
-
-```
-
-## 🛠 Prerequisites
-Before running this project, ensure you have:
-- Python 3 installed
-- pip (Python package manager)
-- Bash (Windows users can use Git Bash)
-- apt, yum, or dnf package manager (for Nginx installation on Linux)
-
----
-
-## ⚙️ Setup Instructions
-
-1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/your-username/infra-automation.git
-cd infra-automation
-```
-
-2️⃣ Create a Python virtual environment
-
-```bash
-python -m venv venv
-```
-
-3️⃣ Activate the virtual environment
-
-**Windows (PowerShell):**
-
-```powershell
-venv\Scripts\Activate.ps1
-```
-
-**Linux/macOS:**
-
-```bash
-source venv/bin/activate
-```
-
-4️⃣ Install dependencies
-```bash
-pip install -r requirements.txt
+├─ requirements.txt
+└─ README.md
 ```
 
 ---
 
-▶️ Usage
-Run the provisioning tool:
+## 📌 Project B — AWS Resource Dashboard (new)
 
-```bash
-python scripts/infra_simulator.py
-```
+A **Flask + boto3** app that runs on your **local machine** and shows live data from your AWS account (EC2, VPCs, ELB, AMIs).  
+**Proof-of-concept screenshots** are stored under `AWS/Screenshots/`.
 
-**Example interaction:**
-```vbnet
-🚀 Welcome to the VM Provisioner!
-Let's get your virtual machines up and running.
-
-Create a new virtual machine
-
-Enter machine name: web01
-Enter operating system (linux/windows/macOs): lin
-Enter number of CPUs: 4
-Enter amount of RAM (in GB): 8
-
- Attempting to install Nginx...
-
-Bash script executed successfully.
-
-Would you like to create another machine? (yes/no): no
-
-✅ Provisioning process completed. Goodbye! 👋
-```
-
----
-
-## 📝 Features
-- User input validation (name, OS, CPU, RAM).
-- Aliases for OS names (win → windows, mac → macOs).
-- Persistent storage in configs/instances.json.
-- Service automation with Bash (setup_nginx.sh).
-- Logging system:
-  - Logs stored in logs/provisioning.log.
-  - Captures provisioning start/end, errors, and success messages.
-- Cross-platform support for Windows, macOS, and Linux.
-
----
-
-## 🔍 Example Log Output (logs/provisioning.log)
-```pgsql
-2025-08-07 18:15:23,452 - INFO - Prompted user to create a new machine.
-2025-08-07 18:15:25,320 - INFO - Machine 'web01' saved successfully.
-2025-08-07 18:15:27,112 - INFO - Nginx installation script ran successfully.
-2025-08-07 18:15:29,876 - INFO - Provisioner exited by user.
-```
-
----
-
-## 📦 Requirements
-All Python dependencies are listed in requirements.txt:
-
+### Structure
 ```text
-jsonschema
+infra-automation/
+├─ projects/
+│   └─ Rolling project AWS - Nikita/
+│       ├─ Python/                      # Application source for the AWS dashboard
+│       │   ├─ app.py                   # Flask app
+│       │   ├─ requirements.txt         # Flask & boto3 deps
+│       │   └─ venv/                    # Local venv (ignored)
+│       │
+│       └─ AWS/                         # Proof of concept (screenshots only)
+│           └─ Screenshots/
+│               ├─ local host 5001-1.png
+│               ├─ local host 5001-2.png
+│               └─ Live EC2 from AWS Console-1.png
 ```
+
+> Note: The **code** is under `Python/`. The **AWS/Screenshots/** folder contains proof-of-concept images.
 
 ---
 
-## 📌 Next Steps
-- Integrate AWS EC2 provisioning using boto3.
-- Add Terraform templates for real infrastructure creation.
-- Expand service automation (e.g., Apache, MySQL).
-- Implement a GUI for easier interaction.
+## 🚀 Run AWS Dashboard
+
+```bash
+cd projects/"Rolling project AWS - Nikita"/Python
+python -m venv venv
+# Windows PowerShell
+venv\Scripts\Activate.ps1
+# Linux/macOS
+# source venv/bin/activate
+
+pip install -r requirements.txt
+
+# Provide AWS creds (env vars)
+export AWS_ACCESS_KEY_ID="YOUR_KEY"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET"
+export AWS_DEFAULT_REGION="us-east-2"
+
+python app.py
+```
+
+Visit:  
+👉 `http://localhost:5001/`  
+👉 Health check: `http://localhost:5001/healthz`
+
+---
+
+## 🖼 Proof of Concept
+Screenshots under:
+```
+projects/Rolling project AWS - Nikita/AWS/Screenshots/
+```
+- `local host 5001-1.png` – Dashboard view  
+- `local host 5001-2.png` – Extended view  
+- `Live EC2 from AWS Console-1.png` – AWS console verification  
+
+---
+
+## 🚫 .gitignore (root of repo)
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+
+# Env / secrets
+*.env
+.env
+
+# Project A (infra-automation)
+logs/
+configs/instances.json
+
+# Project B (AWS Dashboard)
+projects/Rolling project AWS - Nikita/Python/venv/
+projects/Rolling project AWS - Nikita/Python/__pycache__/
+projects/Rolling project AWS - Nikita/Python/*.pyc
+projects/Rolling project AWS - Nikita/Python/.env
+
+# Node / build artifacts
+node_modules/
+dist/
+build/
+```
