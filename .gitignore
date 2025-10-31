@@ -29,10 +29,10 @@ logs/
 configs/instances.json
 
 # Project B (AWS Dashboard)
-projects/Rolling project AWS - Nikita/Python/venv/
-projects/Rolling project AWS - Nikita/Python/__pycache__/
-projects/Rolling project AWS - Nikita/Python/*.pyc
-projects/Rolling project AWS - Nikita/Python/.env
+projects/Rolling project AWS/Python/venv/
+projects/Rolling project AWS/Python/__pycache__/
+projects/Rolling project AWS/Python/*.pyc
+projects/Rolling project AWS/Python/.env
 
 # Node / build artifacts
 node_modules/

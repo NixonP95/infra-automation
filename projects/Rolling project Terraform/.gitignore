@@ -1,0 +1,99 @@
+#################################
+# 🌍 TERRAFORM CONFIGURATION
+#################################
+
+# Local .terraform directories
+.terraform/
+.terraform.*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+terraform.tfstate.backup
+
+# Lock and crash logs
+.terraform.lock.hcl
+crash.log
+.crash.*
+*.backup
+*.bak
+
+# Sensitive variable files
+terraform.tfvars
+*.tfvars
+*.tfvars.local
+*.tfvars.backup
+
+# Sensitive PEM / private keys
+*.pem
+*.key
+*.csr
+
+# Local plan output files
+plan.out
+planfile
+
+# Override files (user-specific)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+#################################
+# 🧠 PYTHON + DEVOPS PROJECT MIX
+#################################
+
+# Virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Log files
+*.log
+
+#################################
+# 🧩 EDITORS / OS
+#################################
+
+# VSCode / JetBrains / Notepad++
+.vscode/
+.idea/
+*.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Backup files
+*.tmp
+*.swp
+*.swo
+*~
+
+#################################
+# 📦 PROJECT STRUCTURE (safety)
+#################################
+
+# Build or local output folders
+output/
+logs/
+tmp/
+temp/
+
+# Node / npm (if ever added)
+node_modules/
+dist/
+
+# Ignore any test exports or archives
+*.zip
+*.tar
+*.tar.gz
