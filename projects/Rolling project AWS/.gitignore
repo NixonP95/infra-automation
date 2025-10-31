@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+
+# Env / secrets
+*.env
+.env
+
+# Project A (infra-automation)
+logs/
+configs/instances.json
+
+# Project B (AWS Dashboard)
+Rolling project AWS - /Python/venv/
+Rolling project AWS - /Python/__pycache__/
+Rolling project AWS - /Python/*.pyc
+Rolling project AWS - /Python/.env
+
+projects/**/venv/
+projects/**/__pycache__/
+projects/**/*.pyc
+projects/**/.env
+
+# Node / build artifacts
+node_modules/
+dist/
+build/
