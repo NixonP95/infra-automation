@@ -3,9 +3,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "infra-automation"
+      Project     = "terraform-ec2-builder"
       Environment = "dev"
-      Owner       = "nikita"
     }
   }
 }

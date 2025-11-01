@@ -1,32 +1,26 @@
-########################################
-# General
-########################################
+################################
+# Required inputs
+################################
 
 variable "aws_region" {
-  description = "AWS region to deploy resources into"
+  description = "AWS region to deploy to"
   type        = string
-  default     = "us-east-1"
+  default     = "us-east-1" 
 }
 
-########################################
-# Networking
-########################################
-
 variable "vpc_id" {
-  description = "Existing VPC ID to use"
+  description = "Target VPC ID"
   type        = string
-  default     = "vpc-0b110d239f1211b4d"
 }
 
 variable "public_subnet_id" {
-  description = "Public subnet (in the VPC) where the EC2 instance will be created"
+  description = "Public subnet ID in the target VPC"
   type        = string
-  default     = "subnet-0852a4e422a2ea812"
 }
 
-########################################
-# EC2 instance
-########################################
+################################
+# Instance settings
+################################
 
 variable "instance_type" {
   description = "EC2 instance type"
@@ -35,41 +29,37 @@ variable "instance_type" {
 }
 
 variable "instance_name" {
-  description = "Name tag for the EC2 instance"
+  description = "EC2 Name tag"
   type        = string
-  default     = "builder-nikita"
+  default     = "builder"
 }
 
-########################################
-# Security group / access
-########################################
+################################
+# Network access
+################################
 
 variable "allowed_cidr_ssh" {
-  description = "CIDR block allowed to SSH into the instance (port 22)"
+  description = "CIDR allowed to SSH :22"
   type        = string
-  # replace with your /32
-  default     = "0.0.0.0/0"
 }
 
 variable "allowed_cidr_app" {
-  description = "CIDR block allowed to access the app port (5001)"
+  description = "CIDR allowed to access port :5001"
   type        = string
-  # replace with your /32
-  default     = "0.0.0.0/0"
 }
 
-########################################
-# SSH key management
-########################################
+################################
+# SSH key generation
+################################
 
 variable "ssh_key_name" {
-  description = "Name of the AWS key pair to create"
+  description = "AWS key pair name to create"
   type        = string
-  default     = "builder-nikita-key"
+  default     = "builder-key"
 }
 
 variable "private_key_filename" {
-  description = "Local filename to write the generated private key to"
+  description = "Local path to save the generated PEM"
   type        = string
-  default     = "builder_nikita.pem"
+  default     = "${path.module}/builder_key.pem"
 }
