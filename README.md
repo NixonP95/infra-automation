@@ -1,26 +1,27 @@
-# 🛠 DevOps Infrastructure Provisioning & AWS Dashboard (Rolling Project)
+# 🛠 DevOps Infrastructure Provisioning & AWS Projects (Rolling Collection)
 
 ## 📌 Overview
-This repository now documents **two related projects**:
+This repository documents **three major infrastructure projects**, built progressively during the DevOps learning path:
 
-1. **Infrastructure Provisioning & Configuration Automation** (the original project in this repo).  
-2. **AWS Resource Dashboard (Rolling project AWS)** – a new project kept under `projects/` with its own code and screenshots.
+1. **Infrastructure Provisioning & Configuration Automation** (Python + Bash simulator).  
+2. **AWS Resource Dashboard (Rolling project AWS)** — a Flask + boto3 web dashboard.  
+3. **Terraform EC2 Builder** — a full Infrastructure-as-Code deployment on AWS using Terraform.
 
-Both projects are independent so history stays clean and nothing breaks.
+All three projects are **independent**, but share the same goal: demonstrating **automation, IaC, and cloud provisioning** best practices.
 
 ---
 
-## 📌 Project A — Infrastructure Provisioning & Configuration Automation (existing)
+## 📦 Project A — Infrastructure Provisioning & Configuration Automation
 
-A Python + Bash simulator that walks through VM provisioning, input validation, JSON persistence, and logging.
+A **Python + Bash simulator** that walks through VM provisioning, input validation, JSON persistence, and logging.
 
-### Features
-- Python modular design with classes  
-- Input validation (e.g., via `jsonschema`)  
-- Service automation with Bash (e.g., Nginx install)  
-- Logging and error handling  
+### ✨ Features
+- Modular Python OOP design (`machine.py`, `infra_simulator.py`)  
+- Bash-based service automation (e.g., Nginx installation)  
+- Logging and error handling (`logs/provisioning.log`)  
+- Configuration persistence using `configs/instances.json`
 
-### Structure
+### 📁 Structure
 ```text
 infra-automation/
 ├─ scripts/
@@ -42,45 +43,40 @@ infra-automation/
 
 ---
 
-## 📌 Project B — AWS Resource Dashboard (new)
+## ☁️ Project B — AWS Resource Dashboard (Flask + boto3)
 
-A **Flask + boto3** app that runs on your **local machine** and shows live data from your AWS account (EC2, VPCs, ELB, AMIs).  
-**Proof-of-concept screenshots** are stored under `AWS/Screenshots/`.
+A **Flask web app** that runs locally and connects to your AWS account to display live data for EC2 instances, VPCs, AMIs, and Load Balancers.  
+Proof-of-concept screenshots are stored under `AWS/Screenshots/`.
 
-### Structure
+### 📁 Structure
 ```text
 infra-automation/
 ├─ projects/
 │   └─ Rolling project AWS/
-│       ├─ Python/                      # Application source for the AWS dashboard
-│       │   ├─ app.py                   # Flask app
-│       │   ├─ requirements.txt         # Flask & boto3 deps
-│       │   └─ venv/                    # Local venv (ignored)
+│       ├─ Python/
+│       │   ├─ app.py
+│       │   ├─ requirements.txt
+│       │   └─ venv/ (ignored)
 │       │
-│       └─ AWS/                         # Proof of concept (screenshots only)
+│       └─ AWS/
 │           └─ Screenshots/
-│               ├─ local host 5001-1.png
-│               ├─ local host 5001-2.png
-│               └─ Live EC2 from AWS Console-1.png
+│               ├─ localhost-5001-1.png
+│               ├─ localhost-5001-2.png
+│               └─ live-ec2-console.png
 ```
 
-> Note: The **code** is under `Python/`. The **AWS/Screenshots/** folder contains proof-of-concept images.
-
----
-
-## 🚀 Run AWS Dashboard
-
+### 🚀 Run the AWS Dashboard
 ```bash
 cd projects/"Rolling project AWS"/Python
 python -m venv venv
-# Windows PowerShell
+# Windows
 venv\Scripts\Activate.ps1
 # Linux/macOS
 # source venv/bin/activate
 
 pip install -r requirements.txt
 
-# Provide AWS creds (env vars)
+# Provide AWS credentials
 export AWS_ACCESS_KEY_ID="YOUR_KEY"
 export AWS_SECRET_ACCESS_KEY="YOUR_SECRET"
 export AWS_DEFAULT_REGION="us-east-2"
@@ -88,64 +84,96 @@ export AWS_DEFAULT_REGION="us-east-2"
 python app.py
 ```
 
-Visit:  
+Then visit:  
 👉 `http://localhost:5001/`  
-👉 Health check: `http://localhost:5001/healthz`
+Health check: `http://localhost:5001/healthz`
 
 ---
 
-## 🖼 Proof of Concept
-Screenshots under:
-```
-projects/Rolling project AWS/AWS/Screenshots/
-```
-- `local host 5001-1.png` – Dashboard view  
-- `local host 5001-2.png` – Extended view  
-- `Live EC2 from AWS Console-1.png` – AWS console verification  
+## 🌍 Project C — Terraform EC2 Builder 
+
+# ☁️ Terraform EC2 Builder (Portfolio Version)
+
+This Terraform configuration demonstrates **Infrastructure-as-Code (IaC)** principles by provisioning a Docker-ready EC2 instance in AWS.
+
+> 🔒 Sensitive IDs and IP addresses have been masked for security.
 
 ---
 
-## 🚫 .gitignore (root of repo)
+## 🧱 Resources Reference
+- **VPC ID:** `vpc-xxxxxxxxxxxxxxxxx`
+- **Subnet ID:** `subnet-xxxxxxxxxxxxxxxxx`
+- **Region:** `us-east-1`
 
-```gitignore
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-*.egg
-*.log
+---
 
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
+## ⚙️ Overview
+This configuration:
+- Generates a secure SSH key pair (local + AWS)
+- Creates a security group allowing:
+  - SSH (22) and App (5001) access from your IP
+- Launches an **Ubuntu EC2 instance**
+- Installs **Docker** automatically via `user_data`
+- Outputs the instance’s public IP for verification
 
-# OS / editor noise
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
-*.orig
+---
 
-# Env / secrets
-*.env
-.env
-
-# Project A (infra-automation)
-logs/
-configs/instances.json
-
-# Project B (AWS Dashboard)
-projects/Rolling project AWS/Python/venv/
-projects/Rolling project AWS/Python/__pycache__/
-projects/Rolling project AWS/Python/*.pyc
-projects/Rolling project AWS/Python/.env
-
-# Node / build artifacts
-node_modules/
-dist/
-build/
+## 🧩 Project Structure
+```text
+Rolling project Terraform/
+├── main.tf
+├── variables.tf
+├── providers.tf
+├── versions.tf
+├── outputs.tf
+├── .gitignore
+└── README.md
 ```
+
+---
+
+## 🚀 How to Run
+
+```bash
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+Once created:
+
+```bash
+terraform output -raw instance_public_ip
+```
+
+Connect via SSH:
+
+```bash
+chmod 600 <your_key>.pem
+ssh -i <your_key>.pem ubuntu@<public_ip>
+```
+
+---
+
+## 🧾 Key Highlights
+- Written in **Terraform (HCL)** with version pinning  
+- Uses **data lookups** for Ubuntu AMIs  
+- Validates subnet/VPC match via a precondition  
+- Demonstrates modular IaC design and secure key management  
+- Installs Docker automatically with no manual setup required
+
+---
+
+## 📦 Tools Used
+- Terraform 1.5+
+- AWS CLI 2.x
+- Ubuntu 22.04 AMI
+- Docker CE
+
+---
+
+## 👤 Author
+**Nikita Pozniak**  
+DevOps Student – Class 35690  
+Project: *Terraform EC2 Builder*  
+Public Portfolio Edition – 2025
