@@ -1,0 +1,159 @@
+pipeline {
+  agent any
+
+  options {
+    timestamps()
+    ansiColor('xterm')
+    disableConcurrentBuilds()
+  }
+
+  environment {
+    // ====== CHANGE THIS ======
+    IMAGE_NAME  = 'pniki/flask-aws-monitor'   // <-- your dockerhub username/repo
+    GIT_BRANCH  = 'main'
+
+    // ====== If Dockerfile is NOT in your repo, enable these ======
+    // If Dockerfile already exists in your app repo -> leave DOCKERFILE_REPO_URL empty.
+    DOCKERFILE_REPO_URL    = ''  // e.g. 'https://github.com/instructor/forked-dockerfile-repo.git'
+    DOCKERFILE_REPO_BRANCH = 'main'
+    DOCKERFILE_PATH_IN_REPO = 'Dockerfile' // or 'welcome/Dockerfile' etc.
+
+    IMAGE_TAG = "${env.BUILD_NUMBER}"
+  }
+
+  stages {
+
+    stage('Checkout') {
+      steps {
+        cleanWs()
+        checkout scm
+        sh 'git rev-parse --short HEAD'
+      }
+    }
+
+    stage('Fetch Dockerfile (optional)') {
+      when { expression { return env.DOCKERFILE_REPO_URL?.trim() } }
+      steps {
+        sh '''
+          set -euxo pipefail
+          rm -rf _dockerfile_repo
+          git clone --depth 1 --branch "${DOCKERFILE_REPO_BRANCH}" "${DOCKERFILE_REPO_URL}" _dockerfile_repo
+          cp "_dockerfile_repo/${DOCKERFILE_PATH_IN_REPO}" ./Dockerfile
+          echo "Dockerfile fetched:"
+          ls -la Dockerfile
+        '''
+      }
+    }
+
+    stage('Parallel Checks') {
+      parallel {
+
+        stage('Linting') {
+          steps {
+            sh '''
+              set -euxo pipefail
+
+              echo "== ShellCheck =="
+              sh_files=$(find . -type f -name "*.sh" || true)
+              if [ -n "$sh_files" ]; then
+                docker run --rm -v "$PWD:/work" -w /work koalaman/shellcheck:stable $sh_files
+              else
+                echo "No .sh files found - skipping ShellCheck"
+              fi
+
+              echo "== Hadolint (Dockerfile) =="
+              if [ -f Dockerfile ]; then
+                docker run --rm -i hadolint/hadolint < Dockerfile
+              else
+                echo "No Dockerfile found - skipping Hadolint"
+              fi
+
+              echo "== Flake8 (Python) =="
+              py_files=$(find . -type f -name "*.py" || true)
+              if [ -n "$py_files" ]; then
+                docker run --rm -v "$PWD:/app" -w /app python:3.11-slim sh -c "pip -q install flake8 && flake8 ."
+              else
+                echo "No .py files found - skipping Flake8"
+              fi
+            '''
+          }
+        }
+
+        stage('Security Scan') {
+          steps {
+            sh '''
+              set -euxo pipefail
+
+              echo "== Bandit (Python security) =="
+              py_files=$(find . -type f -name "*.py" || true)
+              if [ -n "$py_files" ]; then
+                docker run --rm -v "$PWD:/app" -w /app python:3.11-slim sh -c "pip -q install bandit && bandit -r ."
+              else
+                echo "No .py files found - skipping Bandit"
+              fi
+
+              echo "== Trivy FS scan (repo) =="
+              # Exit-code 0 so findings won't fail the pipeline (change to 1 if you want strict mode)
+              docker run --rm -v "$PWD:/work" -w /work aquasec/trivy:latest fs --no-progress --severity HIGH,CRITICAL --exit-code 0 .
+            '''
+          }
+        }
+
+      }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        sh '''
+          set -euxo pipefail
+          echo "Building ${IMAGE_NAME}:${IMAGE_TAG}"
+          docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
+          docker image ls "${IMAGE_NAME}" || true
+        '''
+      }
+    }
+
+    stage('Trivy Image Scan') {
+      steps {
+        sh '''
+          set -euxo pipefail
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest \
+            image --no-progress --severity HIGH,CRITICAL --exit-code 0 "${IMAGE_NAME}:${IMAGE_TAG}"
+        '''
+      }
+    }
+
+    stage('Push to Docker Hub') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+                                          usernameVariable: 'DH_USER',
+                                          passwordVariable: 'DH_PASS')]) {
+          sh '''
+            set -euxo pipefail
+            echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin
+
+            docker push "${IMAGE_NAME}:${IMAGE_TAG}"
+
+            docker tag "${IMAGE_NAME}:${IMAGE_TAG}" "${IMAGE_NAME}:latest"
+            docker push "${IMAGE_NAME}:latest"
+
+            docker logout
+          '''
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "SUCCESS: Pushed ${IMAGE_NAME}:${IMAGE_TAG} and ${IMAGE_NAME}:latest"
+    }
+    failure {
+      echo "FAILED: Check the stage logs above."
+    }
+    always {
+      sh 'docker ps || true'
+      sh 'docker images | head -n 20 || true'
+    }
+  }
+}
