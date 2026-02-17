@@ -30,8 +30,9 @@ pipeline {
     stage('Fetch Dockerfile (optional)') {
       when { expression { return env.DOCKERFILE_REPO_URL?.trim() } }
       steps {
-        sh '''
+        sh '''#!/usr/bin/env bash
           set -euxo pipefail
+          set -x
           rm -rf _dockerfile_repo
           git clone --depth 1 --branch "${DOCKERFILE_REPO_BRANCH}" "${DOCKERFILE_REPO_URL}" _dockerfile_repo
           cp "_dockerfile_repo/${DOCKERFILE_PATH_IN_REPO}" ./Dockerfile
@@ -46,8 +47,9 @@ pipeline {
 
         stage('Linting') {
           steps {
-            sh '''
+            sh '''#!/usr/bin/env bash
               set -euxo pipefail
+              set -x
 
               echo "== ShellCheck =="
               sh_files=$(find . -type f -name "*.sh" || true)
@@ -77,8 +79,9 @@ pipeline {
 
         stage('Security Scan') {
           steps {
-            sh '''
+            sh '''#!/usr/bin/env bash
               set -euxo pipefail
+              set -x
 
               echo "== Bandit (Python security) =="
               py_files=$(find . -type f -name "*.py" || true)
@@ -100,8 +103,9 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh '''
+        sh '''#!/usr/bin/env bash
           set -euxo pipefail
+          set -x
           echo "Building ${IMAGE_NAME}:${IMAGE_TAG}"
           docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
           docker image ls "${IMAGE_NAME}" || true
@@ -111,8 +115,9 @@ pipeline {
 
     stage('Trivy Image Scan') {
       steps {
-        sh '''
+        sh '''#!/usr/bin/env bash
           set -euxo pipefail
+          set -x
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest \
             image --no-progress --severity HIGH,CRITICAL --exit-code 0 "${IMAGE_NAME}:${IMAGE_TAG}"
         '''
@@ -124,8 +129,9 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
                                           usernameVariable: 'DH_USER',
                                           passwordVariable: 'DH_PASS')]) {
-          sh '''
+          sh '''#!/usr/bin/env bash
             set -euxo pipefail
+            set -x
             echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin
 
             docker push "${IMAGE_NAME}:${IMAGE_TAG}"
