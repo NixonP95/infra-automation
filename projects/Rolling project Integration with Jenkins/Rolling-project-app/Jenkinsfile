@@ -8,9 +8,7 @@ pipeline {
   }
 
   environment {
-    // ====== CHANGE THIS ======
-    IMAGE_NAME  = 'pniki/flask-aws-monitor'   // <-- your dockerhub username/repo
-    GIT_BRANCH  = 'main'
+    IMAGE_NAME  = 'nixonp95/flask-aws-monitor'  // <-- your dockerhub username/repo
 
     // ====== If Dockerfile is NOT in your repo, enable these ======
     // If Dockerfile already exists in your app repo -> leave DOCKERFILE_REPO_URL empty.
